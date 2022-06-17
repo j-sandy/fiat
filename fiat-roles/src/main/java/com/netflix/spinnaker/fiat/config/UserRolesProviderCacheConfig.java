@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google, Inc.
+ * Copyright 2021 Salesforce.com, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,19 @@
  * limitations under the License.
  */
 
-dependencies {
-  implementation project(":fiat-roles")
-  implementation project(":fiat-core")
+package com.netflix.spinnaker.fiat.config;
 
-  implementation "org.apache.commons:commons-lang3"
-  implementation "org.springframework.boot:spring-boot-autoconfigure"
-  implementation "org.springframework.security:spring-security-ldap"
-  implementation "com.google.guava:guava"
+import lombok.Data;
+
+@Data
+public class UserRolesProviderCacheConfig {
+
+  /**
+   * If true, then caching is enabled. If false, then all calls are passed directly through to the
+   * subclass, skipping the cache.
+   */
+  private boolean enabled = false;
+
+  /** Default cache entry expire time. */
+  private long expireAfterWriteSeconds = 600;
 }
